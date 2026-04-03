@@ -24,7 +24,7 @@
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 html,body{height:100%;}
-
+ 
 /* ── GNB ── */
 .gnb{
   position:fixed;top:0;left:0;right:0;z-index:100;
@@ -43,12 +43,12 @@ html,body{height:100%;}
   padding:6px 16px;background:transparent;cursor:pointer;
   font-family:inherit;
 }
-
+ 
 /* ── 레이아웃 ── */
 .layout{
   display:flex;height:100vh;padding-top:56px;
 }
-
+ 
 /* 왼쪽 sticky */
 .left-panel{
   width:420px;flex-shrink:0;
@@ -59,7 +59,7 @@ html,body{height:100%;}
   background:#fff;
   border-right:1px solid var(--n100);
 }
-
+ 
 /* 오른쪽 스크롤 */
 .right-panel{
   flex:1;
@@ -67,7 +67,7 @@ html,body{height:100%;}
   background:var(--n50);
   padding:40px 40px 80px;
 }
-
+ 
 /* ── 왼쪽: 메인 카피 ── */
 .copy-area{}
 .copy-badge{
@@ -89,9 +89,17 @@ html,body{height:100%;}
   display:flex;align-items:center;justify-content:center;flex-shrink:0;
 }
 .copy-check svg{width:10px;height:10px;}
-
-/* ── 왼쪽: 결과 요약 (실행 후) ── */
-.summary-area{display:none;flex-direction:column;gap:0;}
+ 
+/* 실행 후 카피 압축 */
+.copy-desc-wrap{transition:opacity .3s;}
+.copy-desc-wrap.hidden{display:none;}
+.copy-headline.compact{
+  font-size:22px;margin-bottom:0;
+  padding-bottom:16px;border-bottom:1px solid var(--n100);
+}
+ 
+/* 결과 요약 — 카피 아래 */
+.summary-area{display:none;flex-direction:column;gap:0;margin-top:16px;}
 .summary-header{
   display:flex;justify-content:space-between;align-items:center;
   margin-bottom:20px;
@@ -120,7 +128,7 @@ html,body{height:100%;}
 .summary-mort{font-size:11px;color:var(--n500);}
 .summary-mort span{font-weight:700;color:var(--n700);}
 .summary-sub{font-size:11px;color:var(--n400);margin-top:16px;line-height:1.6;}
-
+ 
 /* ── 오른쪽: 입력 폼 ── */
 .form-card{
   background:#fff;border:1px solid var(--n200);
@@ -131,19 +139,19 @@ html,body{height:100%;}
 }
 .form-card-title{font-size:15px;font-weight:700;color:#fff;}
 .form-card-sub{font-size:12px;color:rgba(255,255,255,.6);margin-top:3px;}
-
+ 
 /* 섹션 그룹 */
 .form-section{padding:18px 24px;border-bottom:1px solid var(--n100);}
 .form-section:last-of-type{border-bottom:none;}
 .form-sec-title{font-size:14px;font-weight:700;color:var(--n900);margin-bottom:14px;}
-
+ 
 .group-header{display:flex;align-items:center;gap:8px;margin-bottom:12px;}
 .group-label{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--n500);white-space:nowrap;}
 .group-divider{flex:1;height:1px;background:var(--n100);}
 .group-badge{font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;letter-spacing:.03em;white-space:nowrap;}
 .badge-hyper{background:var(--hyper-bg);color:var(--hyper-model);border:1px solid var(--hyper-bd);}
 .badge-hypo{background:var(--hypo-bg);color:var(--hypo-model);border:1px solid var(--hypo-bd);}
-
+ 
 /* 인풋 */
 .f2col{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
 .f3col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
@@ -168,7 +176,7 @@ html,body{height:100%;}
 .field-hint.h-hyper{color:#C49060;}
 .field-hint.h-hypo{color:#7AABD4;}
 .field-hint.h-req{color:#C7302A;}
-
+ 
 /* 혈당 측정값 */
 .glucose-list{display:flex;flex-direction:column;gap:6px;margin-bottom:6px;}
 .glucose-row{display:flex;align-items:center;gap:8px;}
@@ -193,7 +201,7 @@ html,body{height:100%;}
   color:var(--n400);cursor:pointer;
 }
 .add-btn:hover{border-color:var(--n400);color:var(--n600);}
-
+ 
 /* 파생값 미리보기 */
 .derived-box{
   background:var(--p50);border:1px solid var(--p100);
@@ -204,7 +212,7 @@ html,body{height:100%;}
 .derived-label{font-size:12px;font-weight:600;color:var(--p700);}
 .derived-val{font-size:14px;font-weight:800;color:var(--p900);font-family:'Courier New',monospace;}
 .derived-unit{font-size:11px;font-weight:400;color:var(--p500);}
-
+ 
 /* 토글 */
 .toggle-wrap{display:flex;flex-direction:column;gap:6px;}
 .toggle-label{font-size:12px;font-weight:600;color:var(--n700);}
@@ -220,7 +228,7 @@ html,body{height:100%;}
 .toggle-btn:hover{border-color:var(--n300);color:var(--n700);}
 .toggle-btn.on{background:var(--p50);border-color:var(--p500);color:var(--p900);}
 .toggle-btn.on-hypo{background:var(--hypo-bg);border-color:var(--hypo-model);color:var(--hypo-model);}
-
+ 
 /* 버튼 영역 */
 .form-actions{
   padding:16px 24px;
@@ -243,7 +251,7 @@ html,body{height:100%;}
   cursor:pointer;
 }
 .btn-reset:hover{background:var(--n50);}
-
+ 
 /* ── 결과 상세 ── */
 .result-section{display:none;}
 .result-header{
@@ -257,7 +265,7 @@ html,body{height:100%;}
   font-size:12px;font-weight:700;
   padding:5px 14px;border-radius:99px;
 }
-
+ 
 /* 결과 카드 2열 */
 .result-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
 .result-card{
@@ -270,7 +278,7 @@ html,body{height:100%;}
 .rc-ko{font-size:13px;font-weight:700;color:var(--n900);margin-bottom:14px;}
 .rc-prob{font-size:38px;font-weight:800;letter-spacing:-.025em;line-height:1;margin-bottom:10px;}
 .rc-prob sup{font-size:18px;}
-
+ 
 /* 게이지 */
 .gauge-wrap{margin-bottom:6px;}
 .gauge-track{
@@ -289,7 +297,7 @@ html,body{height:100%;}
 .gauge-zone-label{font-size:9px;font-weight:600;}
 .gauge-pcts{display:flex;position:relative;height:10px;margin-top:2px;}
 .gauge-pct{font-size:9px;color:var(--n400);position:absolute;transform:translateX(-50%);}
-
+ 
 .rc-risk{
   display:inline-flex;align-items:center;gap:5px;
   font-size:12px;font-weight:700;
@@ -297,7 +305,7 @@ html,body{height:100%;}
   margin:10px 0 12px;
 }
 .rc-risk-dot{width:6px;height:6px;border-radius:50%;}
-
+ 
 .rc-pred{
   display:flex;justify-content:space-between;align-items:center;
   background:var(--n50);border-radius:8px;
@@ -305,12 +313,12 @@ html,body{height:100%;}
 }
 .rc-pred-label{color:var(--n500);font-weight:600;}
 .rc-pred-val{font-weight:700;}
-
+ 
 .rc-mort{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
 .rc-mort-cell{background:var(--n50);border-radius:8px;padding:10px 12px;}
 .rc-mort-label{font-size:10px;font-weight:600;color:var(--n500);margin-bottom:4px;}
 .rc-mort-val{font-size:18px;font-weight:800;color:var(--n900);}
-
+ 
 /* 결과 해석 */
 .interp{
   border-left:3px solid;border-radius:0 10px 10px 0;
@@ -318,7 +326,7 @@ html,body{height:100%;}
 }
 .interp-title{font-size:11px;font-weight:700;margin-bottom:5px;}
 .interp-body{font-size:13px;color:var(--n700);line-height:1.7;}
-
+ 
 /* 변화 추적 */
 .tracking-box{background:#fff;border:1px solid var(--n200);border-radius:14px;padding:20px;}
 .tracking-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;}
@@ -329,7 +337,7 @@ html,body{height:100%;}
 .chart-legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:12px;padding-top:12px;border-top:1px solid var(--n100);font-size:11px;color:var(--n600);}
 .legend-item{display:flex;align-items:center;gap:5px;}
 .legend-sq{width:10px;height:10px;border-radius:2px;flex-shrink:0;}
-
+ 
 /* ── 모바일 ── */
 @media(max-width:900px){
   .left-panel{display:none;}
@@ -340,7 +348,7 @@ html,body{height:100%;}
 </style>
 </head>
 <body>
-
+ 
 <!-- GNB -->
 <nav class="gnb">
   <div class="gnb-logo">MD Risk<sup>+</sup></div>
@@ -350,16 +358,17 @@ html,body{height:100%;}
     <button class="gnb-btn">Login</button>
   </div>
 </nav>
-
+ 
 <div class="layout">
-
+ 
   <!-- ══ 왼쪽 sticky ══ -->
   <div class="left-panel">
-
-    <!-- 실행 전: 메인 카피 -->
+ 
+    <!-- 카피 — 항상 표시, 실행 후 압축 -->
     <div class="copy-area" id="copy-area">
-      <div class="copy-badge">Medical AI Demo</div>
-      <h1 class="copy-headline">고혈당·저혈당<br>위험도를<br>AI로 예측합니다.</h1>
+      <div class="copy-badge" id="copy-badge">Medical AI Demo</div>
+      <h1 class="copy-headline" id="copy-headline">고혈당·저혈당<br>위험도를<br>AI로 예측합니다.</h1>
+      <div class="copy-desc-wrap" id="copy-desc-wrap">
       <p class="copy-desc">입원 초기 임상 데이터를 입력하면<br>중증 고혈당·저혈당 발생 확률과<br>위험군을 동시에 확인할 수 있습니다.</p>
       <div class="copy-list">
         <div class="copy-item">
@@ -381,8 +390,9 @@ html,body{height:100%;}
           위험군별 30/90일 원내 사망률 제공
         </div>
       </div>
+      </div><!-- /copy-desc-wrap -->
     </div>
-
+ 
     <!-- 실행 후: 결과 요약 -->
     <div class="summary-area" id="summary-area">
       <div class="summary-header">
@@ -392,7 +402,7 @@ html,body{height:100%;}
         <div class="summary-badge" id="summary-badge">1차 예측</div>
       </div>
       <div class="summary-cards">
-
+ 
         <div class="summary-card" id="sum-hyper-card" style="border-left-color:var(--hyper);">
           <div class="summary-card-label" id="sum-hyper-label" style="color:var(--hyper);">Hyperglycemia L2</div>
           <div class="summary-card-prob" id="sum-hyper-prob" style="color:var(--hyper);">—</div>
@@ -406,7 +416,7 @@ html,body{height:100%;}
             30일 <span id="sum-hyper-m30">—</span> · 90일 <span id="sum-hyper-m90">—</span>
           </div>
         </div>
-
+ 
         <div class="summary-card" id="sum-hypo-card" style="border-left-color:var(--hypo);">
           <div class="summary-card-label" id="sum-hypo-label" style="color:var(--hypo);">Hypoglycemia L2</div>
           <div class="summary-card-prob" id="sum-hypo-prob" style="color:var(--hypo);">—</div>
@@ -420,23 +430,23 @@ html,body{height:100%;}
             30일 <span id="sum-hypo-m30">—</span> · 90일 <span id="sum-hypo-m90">—</span>
           </div>
         </div>
-
+ 
       </div>
       <div class="summary-sub" id="summary-sub">값을 수정하고 재실행하면<br>변화 이력이 아래 그래프에 누적됩니다.</div>
     </div>
-
+ 
   </div>
-
+ 
   <!-- ══ 오른쪽 스크롤 ══ -->
   <div class="right-panel">
-
+ 
     <!-- ── 입력 폼 ── -->
     <div class="form-card">
       <div class="form-card-header">
         <div class="form-card-title">환자 데이터 입력</div>
         <div class="form-card-sub">고혈당 · 저혈당 위험도 동시 예측</div>
       </div>
-
+ 
       <!-- 혈당 측정값 -->
       <div class="form-section">
         <div class="form-sec-title">혈당 측정값</div>
@@ -466,11 +476,11 @@ html,body{height:100%;}
         </div>
         <div class="field-hint" style="margin-top:6px;">측정값 1개 입력 시 변동계수는 0으로 처리됩니다. 2개 이상을 권장합니다.</div>
       </div>
-
+ 
       <!-- 혈액검사 수치 -->
       <div class="form-section">
         <div class="form-sec-title">혈액검사 수치</div>
-
+ 
         <!-- 공통 -->
         <div class="group-header">
           <span class="group-label">공통</span>
@@ -494,7 +504,7 @@ html,body{height:100%;}
             <span class="field-hint h-req">필수 입력 항목</span>
           </div>
         </div>
-
+ 
         <!-- 고혈당 전용 -->
         <div class="group-header">
           <span class="group-label">고혈당 모델 추가 입력</span>
@@ -527,7 +537,7 @@ html,body{height:100%;}
             <span class="field-hint h-hyper">미입력 시 24.6 자동 적용</span>
           </div>
         </div>
-
+ 
         <!-- 저혈당 전용 -->
         <div class="group-header">
           <span class="group-label">저혈당 모델 추가 입력</span>
@@ -545,11 +555,11 @@ html,body{height:100%;}
           </div>
         </div>
       </div>
-
+ 
       <!-- 임상 상태 -->
       <div class="form-section">
         <div class="form-sec-title">임상 상태</div>
-
+ 
         <!-- 공통 -->
         <div class="group-header">
           <span class="group-label">공통</span>
@@ -573,7 +583,7 @@ html,body{height:100%;}
             <span class="field-hint">두 모델 공통 입력</span>
           </div>
         </div>
-
+ 
         <!-- 저혈당 전용 -->
         <div class="group-header">
           <span class="group-label">저혈당 모델 추가 입력</span>
@@ -591,17 +601,17 @@ html,body{height:100%;}
           </div>
         </div>
       </div>
-
+ 
       <!-- 버튼 -->
       <div class="form-actions">
         <button class="btn-predict" onclick="runPredict()">고혈당 · 저혈당 위험도 예측</button>
         <button class="btn-reset" onclick="resetAll()">초기화</button>
       </div>
     </div>
-
+ 
     <!-- ── 결과 상세 ── -->
     <div class="result-section" id="result-section">
-
+ 
       <div class="result-header">
         <div>
           <div class="result-title">예측 결과</div>
@@ -609,10 +619,10 @@ html,body{height:100%;}
         </div>
         <div class="result-run" id="result-run">1차 예측</div>
       </div>
-
+ 
       <!-- 결과 카드 2열 -->
       <div class="result-cards">
-
+ 
         <!-- 고혈당 카드 -->
         <div class="result-card">
           <div class="result-card-accent" id="rc-hyper-accent" style="background:var(--hyper);"></div>
@@ -620,7 +630,7 @@ html,body{height:100%;}
             <div class="rc-en" style="color:var(--hyper);">Hyperglycemia L2</div>
             <div class="rc-ko">고혈당 위험도</div>
             <div class="rc-prob" id="rc-hyper-prob" style="color:var(--hyper);">—</div>
-
+ 
             <!-- 게이지 -->
             <div class="gauge-wrap">
               <div class="gauge-track">
@@ -636,7 +646,7 @@ html,body{height:100%;}
                 <span class="gauge-pct" style="left:90%;">90%</span>
               </div>
             </div>
-
+ 
             <div class="rc-risk" id="rc-hyper-risk">
               <div class="rc-risk-dot" id="rc-hyper-risk-dot"></div>
               <span id="rc-hyper-risk-label">—</span>
@@ -657,7 +667,7 @@ html,body{height:100%;}
             </div>
           </div>
         </div>
-
+ 
         <!-- 저혈당 카드 -->
         <div class="result-card">
           <div class="result-card-accent" style="background:var(--hypo);"></div>
@@ -665,7 +675,7 @@ html,body{height:100%;}
             <div class="rc-en" style="color:var(--hypo);">Hypoglycemia L2</div>
             <div class="rc-ko">저혈당 위험도</div>
             <div class="rc-prob" id="rc-hypo-prob" style="color:var(--hypo);">—</div>
-
+ 
             <!-- 게이지 -->
             <div class="gauge-wrap">
               <div class="gauge-track">
@@ -681,7 +691,7 @@ html,body{height:100%;}
                 <span class="gauge-pct" style="left:90%;">90%</span>
               </div>
             </div>
-
+ 
             <div class="rc-risk" id="rc-hypo-risk">
               <div class="rc-risk-dot" id="rc-hypo-risk-dot"></div>
               <span id="rc-hypo-risk-label">—</span>
@@ -702,15 +712,15 @@ html,body{height:100%;}
             </div>
           </div>
         </div>
-
+ 
       </div>
-
+ 
       <!-- 결과 해석 -->
       <div class="interp" id="interp">
         <div class="interp-title" id="interp-title">결과 해석</div>
         <div class="interp-body" id="interp-body"></div>
       </div>
-
+ 
       <!-- 변화 추적 -->
       <div class="tracking-box">
         <div class="tracking-header">
@@ -730,11 +740,11 @@ html,body{height:100%;}
           <div class="legend-item"><div class="legend-sq" style="background:#C7302A;opacity:.7;"></div>Very High 기준 90%</div>
         </div>
       </div>
-
+ 
     </div>
   </div>
 </div>
-
+ 
 <script>
 /* ── 상수 ── */
 const RISK_MAP = {
@@ -745,12 +755,12 @@ const RISK_MAP = {
 };
 function riskColor(p){ return p>=.9?"#C7302A":p>=.75?"#D46B08":p>=.25?"#B08010":"#2E7D52"; }
 function riskGroup(p){ return p>=.9?"Very High-Risk":p>=.75?"High-Risk":p>=.25?"Intermediate-Risk":"Low-Risk"; }
-
+ 
 /* ── 상태 ── */
 let history=[];
 let chartInst=null;
 const toggleVals={insulin:0,icu:0,vaso:0};
-
+ 
 /* ── 혈당 동적 입력 ── */
 function addGlucose(){
   const list=document.getElementById('glucose-list');
@@ -776,7 +786,7 @@ function calcDerived(){
   document.getElementById('d-mean').innerHTML=`${mean.toFixed(1)} <span class="derived-unit">mg/dL</span>`;
   document.getElementById('d-cv').textContent=cv.toFixed(3);
 }
-
+ 
 /* ── 토글 ── */
 function setToggle(btn,key,val){
   toggleVals[key]=val;
@@ -790,14 +800,14 @@ function setToggleHypo(btn,key,val){
   [...row.children].forEach(b=>b.classList.remove('on-hypo'));
   btn.classList.add('on-hypo');
 }
-
+ 
 /* ── 예측 실행 ──────────────────────────────────────────────
  * 실제 서비스에서는 아래 mock 결과를 inference 결과로 교체
  * ────────────────────────────────────────────────────────── */
 function runPredict(){
   const inputs=[...document.querySelectorAll('.glucose-input')].map(i=>parseFloat(i.value)).filter(v=>!isNaN(v));
   if(!inputs.length){alert('혈당 측정값을 최소 1개 입력하세요.');return;}
-
+ 
   // mock — 실제 서비스에서 inferResult()로 대체
   const noise=()=>(Math.random()-.5)*.15;
   const base=history.length%2===0?{hp:.73,hyp:.18}:{hp:.42,hyp:.31};
@@ -815,44 +825,46 @@ function runPredict(){
   result.hyper.prediction=result.hyper.prob>=.458?1:0;
   result.hypo.risk_group=riskGroup(result.hypo.prob);
   result.hypo.prediction=result.hypo.prob>=.246?1:0;
-
+ 
   inferResult(result);
 }
-
+ 
 /* ── 외부 연동 진입점 ── */
 function inferResult(data){
   history.push(data);
   render();
 }
-
+ 
 /* ── 렌더 ── */
 function render(){
   const latest=history[history.length-1];
   const n=history.length;
-
-  // 왼쪽 전환
-  document.getElementById('copy-area').style.display='none';
+ 
+  // 왼쪽 — 카피 압축 + 결과 요약 표시
+  document.getElementById('copy-desc-wrap').classList.add('hidden');
+  document.getElementById('copy-badge').style.display='none';
+  document.getElementById('copy-headline').classList.add('compact');
   const sa=document.getElementById('summary-area');
   sa.style.display='flex';
   document.getElementById('summary-badge').textContent=n+'차 예측';
-
+ 
   updateSummaryCard('sum-hyper','고혈당','#C7302A',latest.hyper);
   updateSummaryCard('sum-hypo','저혈당','#1668B8',latest.hypo);
-
+ 
   // 오른쪽 결과
   const rs=document.getElementById('result-section');
   rs.style.display='block';
   document.getElementById('result-run').textContent=n+'차 예측';
   document.getElementById('result-sub').textContent='총 '+n+'회 실행 · 값 수정 후 재실행하면 그래프에 누적됩니다';
-
+ 
   updateResultCard('hyper',latest.hyper,'#C7302A');
   updateResultCard('hypo',latest.hypo,'#1668B8');
   updateInterp(latest);
   updateChart();
-
+ 
   rs.scrollIntoView({behavior:'smooth',block:'start'});
 }
-
+ 
 function updateSummaryCard(prefix,label,color,r){
   const risk=RISK_MAP[r.risk_group]||{fg:'#84849A',bg:'#F0F0F7'};
   document.getElementById(prefix+'-prob').textContent=(r.prob*100).toFixed(1)+'%';
@@ -863,34 +875,34 @@ function updateSummaryCard(prefix,label,color,r){
   document.getElementById(prefix+'-m30').textContent=r.mortality_30d.toFixed(1)+'%';
   document.getElementById(prefix+'-m90').textContent=r.mortality_90d.toFixed(1)+'%';
 }
-
+ 
 function updateResultCard(prefix,r,color){
   const pct=(r.prob*100).toFixed(1);
   const risk=RISK_MAP[r.risk_group]||{fg:'#84849A',bg:'#F0F0F7'};
-
+ 
   document.getElementById('rc-'+prefix+'-prob').textContent=pct+'%';
-
+ 
   // 게이지 마커
   const marker=document.getElementById(prefix+'-marker');
   marker.style.left=pct+'%';
   marker.style.background=riskColor(r.prob);
-
+ 
   // 위험군
   const riskEl=document.getElementById('rc-'+prefix+'-risk');
   riskEl.style.background=risk.bg; riskEl.style.color=risk.fg;
   document.getElementById('rc-'+prefix+'-risk-dot').style.background=risk.fg;
   document.getElementById('rc-'+prefix+'-risk-label').textContent=r.risk_group;
-
+ 
   // 예측
   const predEl=document.getElementById('rc-'+prefix+'-pred');
   predEl.textContent=r.prediction===1?'양성 (발생 예상)':'음성';
   predEl.style.color=r.prediction===1?'#C7302A':'#2E7D52';
-
+ 
   // 사망률
   document.getElementById('rc-'+prefix+'-m30').textContent=r.mortality_30d.toFixed(1)+'%';
   document.getElementById('rc-'+prefix+'-m90').textContent=r.mortality_90d.toFixed(1)+'%';
 }
-
+ 
 function updateInterp(latest){
   const h=latest.hyper,p=latest.hypo;
   const lines=[];
@@ -902,7 +914,7 @@ function updateInterp(latest){
     lines.push('고혈당·저혈당 모두 양성 예측입니다. 혈당 변동성 관리가 필요합니다.');
   if(!lines.length)
     lines.push('현재 입력값 기준 혈당 위험도는 낮은 수준입니다. 정기 모니터링을 유지하십시오.');
-
+ 
   const isWarn=['Very High-Risk','High-Risk'].includes(h.risk_group)||['Very High-Risk','High-Risk'].includes(p.risk_group);
   const box=document.getElementById('interp');
   box.style.borderLeftColor=isWarn?'#C7302A':'#2E7D52';
@@ -910,15 +922,15 @@ function updateInterp(latest){
   document.getElementById('interp-title').style.color=isWarn?'#C7302A':'#2E7D52';
   document.getElementById('interp-body').innerHTML=lines.map(l=>'<div>'+l+'</div>').join('');
 }
-
+ 
 function updateChart(){
   const n=history.length;
   const labels=history.map((_,i)=>(i+1)+'차');
   const hyperD=history.map(h=>+h.hyper.prob.toFixed(4));
   const hypoD=history.map(h=>+h.hypo.prob.toFixed(4));
-
+ 
   if(chartInst){chartInst.destroy();chartInst=null;}
-
+ 
   const refPlugin={
     id:'ref',
     afterDraw(chart){
@@ -933,7 +945,7 @@ function updateChart(){
       });
     }
   };
-
+ 
   const ctx=document.getElementById('track-chart').getContext('2d');
   chartInst=new Chart(ctx,{
     type:'line',plugins:[refPlugin],
@@ -954,20 +966,22 @@ function updateChart(){
       }
     }
   });
-
+ 
   document.getElementById('tracking-sub').textContent='예측 실행 시마다 확률 누적 · 총 '+n+'회 실행';
   document.getElementById('tracking-count').textContent=n+'회 실행';
 }
-
+ 
 /* ── 초기화 ── */
 function resetAll(){
   history=[];
   if(chartInst){chartInst.destroy();chartInst=null;}
-
-  document.getElementById('copy-area').style.display='block';
+ 
+  document.getElementById('copy-desc-wrap').classList.remove('hidden');
+  document.getElementById('copy-badge').style.display='';
+  document.getElementById('copy-headline').classList.remove('compact');
   document.getElementById('summary-area').style.display='none';
   document.getElementById('result-section').style.display='none';
-
+ 
   document.getElementById('glucose-list').innerHTML=`
     <div class="glucose-row">
       <span class="glucose-num">1</span>
