@@ -243,7 +243,8 @@ html,body{height:100%;}
   cursor:pointer;letter-spacing:-.01em;
   transition:background .15s;
 }
-.btn-predict:hover{background:var(--p700);}
+.btn-predict:hover:not(:disabled){background:var(--p700);}
+.btn-predict:disabled{background:var(--n300);cursor:not-allowed;}
 .btn-reset{
   height:46px;padding:0 20px;background:#fff;color:var(--n500);
   border:1.5px solid var(--n200);border-radius:10px;
@@ -492,7 +493,7 @@ html,body{height:100%;}
               <span class="field-label">Albumin <span class="req">*</span></span>
               <span class="field-unit">g/dL</span>
             </div>
-            <input type="number" placeholder="0.5 – 6.0" id="f-albumin">
+            <input type="number" placeholder="0.5 – 6.0" id="f-albumin" oninput="checkRequired()">
             <span class="field-hint h-req">필수 입력 항목</span>
           </div>
           <div class="field">
@@ -500,7 +501,7 @@ html,body{height:100%;}
               <span class="field-label">CRP <span class="req">*</span></span>
               <span class="field-unit">mg/L</span>
             </div>
-            <input type="number" placeholder="0 – 500" id="f-crp">
+            <input type="number" placeholder="0 – 500" id="f-crp" oninput="checkRequired()">
             <span class="field-hint h-req">필수 입력 항목</span>
           </div>
         </div>
@@ -604,7 +605,7 @@ html,body{height:100%;}
  
       <!-- 버튼 -->
       <div class="form-actions">
-        <button class="btn-predict" onclick="runPredict()">고혈당 · 저혈당 위험도 예측</button>
+        <button class="btn-predict" id="btn-predict" onclick="runPredict()" disabled>고혈당 · 저혈당 위험도 예측</button>
         <button class="btn-reset" onclick="resetAll()">초기화</button>
       </div>
     </div>
@@ -746,7 +747,14 @@ html,body{height:100%;}
 </div>
  
 <script>
-/* ── 상수 ── */
+/* ── 필수값 체크 → 버튼 활성화 ── */
+function checkRequired(){
+  const hasGlucose=[...document.querySelectorAll('.glucose-input')]
+    .some(i=>i.value.trim()!=='');
+  const hasAlbumin=document.getElementById('f-albumin').value.trim()!=='';
+  const hasCrp=document.getElementById('f-crp').value.trim()!=='';
+  document.getElementById('btn-predict').disabled=!(hasGlucose&&hasAlbumin&&hasCrp);
+}
 const RISK_MAP = {
   "Very High-Risk":    {fg:"#C7302A",bg:"#FFF0EF"},
   "High-Risk":         {fg:"#D46B08",bg:"#FFF7ED"},
@@ -785,6 +793,7 @@ function calcDerived(){
   const cv=inputs.length>1?Math.sqrt(inputs.reduce((a,b)=>a+(b-mean)**2,0)/(inputs.length-1))/mean:0;
   document.getElementById('d-mean').innerHTML=`${mean.toFixed(1)} <span class="derived-unit">mg/dL</span>`;
   document.getElementById('d-cv').textContent=cv.toFixed(3);
+  checkRequired();
 }
  
 /* ── 토글 ── */
@@ -990,6 +999,7 @@ function resetAll(){
     </div>`;
   document.getElementById('d-mean').innerHTML='— <span class="derived-unit">mg/dL</span>';
   document.getElementById('d-cv').textContent='—';
+  document.getElementById('btn-predict').disabled=true;
   ['f-albumin','f-crp','f-sodium','f-chloride','f-urea','f-creatinine'].forEach(id=>{
     const el=document.getElementById(id);if(el)el.value='';
   });
