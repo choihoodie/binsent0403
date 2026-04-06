@@ -252,6 +252,13 @@ html,body{height:100%;}
   cursor:pointer;
 }
 .btn-reset:hover{background:var(--n50);}
+.btn-next{
+  height:46px;padding:0 20px;background:var(--p50);color:var(--p900);
+  border:1.5px solid var(--p100);border-radius:10px;
+  font-family:'Pretendard',sans-serif;font-size:13px;font-weight:700;
+  cursor:pointer;display:none;
+}
+.btn-next:hover{background:var(--p100);}
  
 /* ── 결과 상세 ── */
 .result-section{display:none;}
@@ -606,6 +613,7 @@ html,body{height:100%;}
       <!-- 버튼 -->
       <div class="form-actions">
         <button class="btn-predict" id="btn-predict" onclick="runPredict()" disabled>고혈당 · 저혈당 위험도 예측</button>
+        <button class="btn-next" id="btn-next" onclick="nextRound()">다음 회차 입력</button>
         <button class="btn-reset" onclick="resetAll()">초기화</button>
       </div>
     </div>
@@ -747,7 +755,25 @@ html,body{height:100%;}
 </div>
  
 <script>
-/* ── 필수값 체크 → 버튼 활성화 ── */
+/* ── 다음 회차 입력 ── */
+function nextRound(){
+  // 입력값만 초기화 (이력 유지)
+  document.getElementById('glucose-list').innerHTML=`
+    <div class="glucose-row">
+      <span class="glucose-num">1</span>
+      <input class="glucose-input" type="number" placeholder="20 – 600" oninput="calcDerived()">
+      <button class="glucose-rm" onclick="removeGlucose(this)">×</button>
+    </div>`;
+  document.getElementById('d-mean').innerHTML='— <span class="derived-unit">mg/dL</span>';
+  document.getElementById('d-cv').textContent='—';
+  ['f-albumin','f-crp','f-sodium','f-chloride','f-urea','f-creatinine'].forEach(id=>{
+    const el=document.getElementById(id); if(el) el.value='';
+  });
+  document.getElementById('btn-predict').disabled=true;
+ 
+  // 폼 최상단으로 스크롤
+  document.querySelector('.form-card').scrollIntoView({behavior:'smooth', block:'start'});
+}
 function checkRequired(){
   const hasGlucose=[...document.querySelectorAll('.glucose-input')]
     .some(i=>i.value.trim()!=='');
@@ -857,6 +883,7 @@ function render(){
   sa.style.display='flex';
   document.getElementById('summary-badge').textContent=n+'차 예측';
  
+  document.getElementById('btn-next').style.display='block';
   updateSummaryCard('sum-hyper','고혈당','#C7302A',latest.hyper);
   updateSummaryCard('sum-hypo','저혈당','#1668B8',latest.hypo);
  
@@ -999,6 +1026,7 @@ function resetAll(){
     </div>`;
   document.getElementById('d-mean').innerHTML='— <span class="derived-unit">mg/dL</span>';
   document.getElementById('d-cv').textContent='—';
+  document.getElementById('btn-next').style.display='none';
   document.getElementById('btn-predict').disabled=true;
   ['f-albumin','f-crp','f-sodium','f-chloride','f-urea','f-creatinine'].forEach(id=>{
     const el=document.getElementById(id);if(el)el.value='';
@@ -1007,3 +1035,4 @@ function resetAll(){
 </script>
 </body>
 </html>
+ 
